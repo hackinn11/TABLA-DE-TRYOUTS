@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Clasificación - Grupo Especial de Operaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .jugador-info {
+            margin-top: 20px;
+            display: none;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .jugador-info h2 {
+            margin-top: 0;
+        }
+
+        /* Fondo con opacidad */
+        body {
+            background-image: url('https://scontent.xx.fbcdn.net/v/t1.15752-9/462557283_3900189836866170_6733315434492281317_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=0024fc&_nc_ohc=jqQlyxNsm8kQ7kNvgGYWuKV&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&_nc_gid=AgUzKyBmsuCt-oxl5mFU1dJ&oh=03_Q7cD1QHmKo4tF7NpGMyS-Jx7ahrhk50RAoHxqKHVCKZxbwpGbA&oe=67340358');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabla de Clasificación - Grupo Especial de Operaciones</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+            </tr> 
+        </thead>
+        <tbody id="tabla-clasificacion">
+            <!-- Las filas se generarán automáticamente aquí -->
+        </tbody>
+    </table>
+
+    <div class="jugador-info" id="jugador-info">
+        <h2>Información del Jugador</h2>
+        <p id="info-nombre"></p>
+        <p id="info-fecha-nacimiento"></p>
+        <p id="info-rango"></p>
+        <p id="info-fecha-ingreso"></p>
+        <p id="info-fecha-retiro"></p>
+        <p id="info-usuario-roblox"></p>
+        <p id="info-usuario-discord"></p>
+        <p id="info-pruebas-tiro"></p>
+        <p id="info-prueba-psicologica"></p>
+        <p id="info-resistencia-fisica"></p>
+        <p id="info-tiempo-entrenamiento"></p>
+    </div>
+
+    <script>
+        // Datos de los jugadores
+        const datos = [
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Juan", "fechaNacimiento": "02/02/1991", "rango": "Teniente", "fechaIngreso": "01/02/2020", "fechaRetiro": "01/02/2023", "usuarioRoblox": "Juan_RBX", "usuarioDiscord": "Juan#5678", "pruebasTiro": "85%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "7/10", "tiempoEntrenamiento": "5 meses" },
+            { "nombre": "Carlos", "fechaNacimiento": "03/03/1992", "rango": "Capitán", "fechaIngreso": "01/03/2020", "fechaRetiro": "01/03/2023", "usuarioRoblox": "Carlos_RBX", "usuarioDiscord": "Carlos#9101", "pruebasTiro": "95%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "9/10", "tiempoEntrenamiento": "7 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+            { "nombre": "Fernando", "fechaNacimiento": "01/01/1990", "rango": "Sargento", "fechaIngreso": "01/01/2020", "fechaRetiro": "01/01/2023", "usuarioRoblox": "Fernando_RBX", "usuarioDiscord": "Fernando#1234", "pruebasTiro": "90%", "pruebaPsicologica": "Aprobada", "resistenciaFisica": "8/10", "tiempoEntrenamiento": "6 meses" },
+        ];
+
+        // Generar la tabla de clasificación
+        const tablaClasificacion = document.getElementById('tabla-clasificacion');
+
+        datos.forEach(jugador => {
+            const row = document.createElement('tr');
+            const cell = document.createElement('td');
+            cell.textContent = jugador.nombre;
+            cell.style.cursor = 'pointer';
+            cell.onclick = () => mostrarInformacionJugador(jugador);
+            row.appendChild(cell);
+            tablaClasificacion.appendChild(row);
+        });
+
+        function mostrarInformacionJugador(jugador) {
+            document.getElementById('info-nombre').textContent = 'Nombre: ' + jugador.nombre;
+            document.getElementById('info-fecha-nacimiento').textContent = 'Fecha de Nacimiento: ' + jugador.fechaNacimiento;
+            document.getElementById('info-rango').textContent = 'Rango: ' + jugador.rango;
+            document.getElementById('info-fecha-ingreso').textContent = 'Fecha de Ingreso: ' + jugador.fechaIngreso;
+            document.getElementById('info-fecha-retiro').textContent = 'Fecha de Retiro: ' + jugador.fechaRetiro;
+            document.getElementById('info-usuario-roblox').textContent = 'Usuario de Roblox: ' + jugador.usuarioRoblox;
+            document.getElementById('info-usuario-discord').textContent = 'Usuario de Discord: ' + jugador.usuarioDiscord;
+            document.getElementById('info-pruebas-tiro').textContent = 'Pruebas de Tiro/Velocidad: ' + jugador.pruebasTiro;
+            document.getElementById('info-prueba-psicologica').textContent = 'Prueba Psicológica: ' + jugador.pruebaPsicologica;
+            document.getElementById('info-resistencia-fisica').textContent = 'Resistencia Física: ' + jugador.resistenciaFisica;
+            document.getElementById('info-tiempo-entrenamiento').textContent = 'Tiempo de Entrenamiento: ' + jugador.tiempoEntrenamiento;
+            document.getElementById('jugador-info').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
